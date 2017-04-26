@@ -1,1 +1,2 @@
 1.commit: buinn að gera töflurnar og tengja þær.. nú er bara að setja í þær
+2.commit:  lagaði aðeins,bætti smá við,og undirbý innsetningu skráa.

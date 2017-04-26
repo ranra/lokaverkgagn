@@ -1,4 +1,4 @@
-create database 2209922929_Lokaverkefni,
+create database 2209922929_Lokaverkefni;
 
 
 use 2209922929_Lokaverkefni;
@@ -7,14 +7,14 @@ use 2209922929_Lokaverkefni;
 create table Tegund
 (
 id int not null primary key auto_increment,
-nafn varchar(255)
+tegund varchar(255)
 );
 
 
 create table Flokkur
 (
 id int not null primary key auto_increment,
-nafn varchar(255)
+flokkur varchar(255)
 );
 
 
@@ -32,9 +32,10 @@ id int primary key auto_increment not null,
 
 nafn varchar(255) not null,
 faedingardagur varchar(255),
-danardagur varchar(255),
+lifandi varchar(255),
+dainn varchar(255) null,
 lysing varchar(255),
-tilheyrir varchar(255)
+tilheyrir varchar(255)not null
 
 );
 
@@ -45,7 +46,8 @@ id int primary key auto_increment not null,
 
 nafn varchar(255) not null,
 stofndagur varchar(255),
-haetti varchar(255),
+starfandi varchar(255),
+lok varchar(255),
 lysing varchar(255),
 artist_flokkur int not null,
 artist_medlimir int not null,
@@ -63,8 +65,8 @@ create table Cd
 id int  not null primary key auto_increment,
 nafn varchar(255) not null,
 utgafudagur varchar(255) not null,
-cd_tegund int not null,
 cd_flytjandi int not null,
+cd_tegund int not null,
 cd_utgefandi int not null,
 foreign key(cd_tegund)
 	references Tegund(id),
@@ -91,5 +93,50 @@ foreign key(lag_flytjandi)
 foreign key(lag_cd)
 	references Cd(id)
 );
+
+insert into
+Tegund(tegund)
+values
+("pop"),
+("rock"),
+("disco"),
+("electro"),
+("deephouse");
+
+insert into
+Flokkur(flokkur)
+values
+("solo"),
+("duo"),
+("band");
+
+insert into
+Utgefandi(nafn)
+values
+("");
+
+
+insert into
+Medlimir(nafn,faedingardagur,lifandi,dainn,lysing,tilheyrir)
+values
+("");
+
+
+insert into
+Artist(nafn,stofndagur,starfandi,lok,lysing,artist_flokkur,artist_medlimir)
+values
+("");
+
+insert into
+Cd(nafn,utgafudagur,cd_flytjandi,cd_tegund,cd_utgefandi)
+values
+("");
+
+insert into
+Lag(nafn,lengd,texti,lag_tegund,lag_flytjandi,lag_cd)
+values
+("");
+
+ 
 
 
