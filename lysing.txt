@@ -1,0 +1,1 @@
+1.commit: buinn að gera töflurnar og tengja þær.. nú er bara að setja í þær
