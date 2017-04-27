@@ -156,7 +156,7 @@ values
 ("sometimes thing get,Whatever","0820",null,5,2,2),
 ("slip","0743",null,5,2,2),
 ("some kind of blue","0800",null,5,2,2),
-("i remember","0954","kaskade",null,5,2,2),
+("i remember","0954","kaskade",5,2,2),
 ("highway to hell","0329","AngusYoung,Malcom Young,Bon Scott",2,3,3),
 ("Walk all over you","0510","AngusYoung,Malcom Young,Bon Scott",2,3,3),
 ("Girls got rythm","0324","AngusYoung,Malcom Young,Bon Scott",2,3,3),
