@@ -74,20 +74,20 @@ foreign key(cd_utgefandi)
 );
 
 
-create table Lag
+create table Log
 (
 id int  not null primary key auto_increment,
 nafn varchar(255) not null,
 lengd time,
 texti varchar(255) null,
-lag_tegund int not null,
-lag_artist int not null,
-lag_cd int not null,
-foreign key(lag_tegund)
+log_tegund int not null,
+log_artist int not null,
+log_cd int not null,
+foreign key(log_tegund)
 	references Tegund(id),
-foreign key(lag_artist)
+foreign key(log_artist)
 	references Artist(id),
-foreign key(lag_cd)
+foreign key(log_cd)
 	references Cd(id)
 );
 
@@ -159,7 +159,7 @@ insert into
 Cd(nafn,utgafudagur,cd_artist,cd_tegund,cd_utgefandi)
 values
 ("B4.DA.$$",20/1/2015,1,4,1),
-("randomAlbumTitle",9/8/2008,2,5,2),
+("Random Album Title",9/8/2008,2,5,2),
 ("Highway to hell",7/27/1979,3,2,3),
 ("Smiley smile ",12/18/2001,4,1,4),
 ("Saturday Night Fever: The Original Movie Sound Track ",11/15/1977,5,3,5),
@@ -169,7 +169,7 @@ values
 
 
 insert into
-Lag(nafn,lengd,texti,lag_tegund,lag_artist,lag_cd)
+Log(nafn,lengd,texti,log_tegund,log_artist,log_cd)
 values
 ("saveTheChildren","0355","Jo-Vaughn/Scott,Patrick Baril",4,1,1),
 ("PaperTrails","0314","Scott/LeeBannon",4,1,1),
