@@ -47,9 +47,9 @@ create table Medlimir
 id int primary key auto_increment not null,
 
 nafn varchar(255) not null,
-faedingardagur date,
-lifandi varchar(255)not null,
-latinn date,
+faedingardagur date null,
+lifandi varchar(255) null,
+latinn date null,
 lysing varchar(255)null,
 tilheyrir_artist int not null,
 foreign key (tilheyrir_artist)
@@ -106,7 +106,8 @@ Flokkur(flokkur)
 values
 ("solo"),
 ("band"),
-("dj");
+("dj")
+;
 
 insert into
 Utgefandi(nafn)
@@ -115,7 +116,8 @@ values
 ("mau5trap"),
 ("Albert/Atlantic"),
 ("Brother/Capitol"),
-("RSO, Polydor, Reprise");
+("RSO, Polydor, Reprise")
+;
 
 
 
@@ -127,7 +129,6 @@ values
 ("AC/DC",null/null/1973,"ja",null,2),
 ("Beach boys",null/null/1961,"ja",null,3),
 ("Bee gees",null/null/1958,"nei",null/null/2012,3)
-
 ;
 
 
@@ -163,6 +164,7 @@ values
 ("Smiley smile ",12/18/2001,4,1,4),
 ("Saturday Night Fever: The Original Movie Sound Track ",11/15/1977,5,3,5),
 ("All American Bada$$",4/7/2017,1,4,1),
+("Back in Black",6/25/1980,3,2,3)
 ;
 
 
@@ -175,7 +177,7 @@ values
 ("sometimes thing get,Whatever","0820",null,5,2,2),
 ("slip","0743",null,5,2,2),
 ("some kind of blue","0800",null,5,2,2),
-("i remember","0954","kaskade",null,5,2,2),
+("i remember","0954","kaskade",5,2,2),
 ("highway to hell","0329","AngusYoung/Malcom Young,Bon Scott",2,3,3),
 ("Walk all over you","0510","AngusYoung/Malcom Young,Bon Scott",2,3,3),
 ("Girls got rythm","0324","AngusYoung/Malcom Young,Bon Scott",2,3,3),
@@ -183,12 +185,12 @@ values
 ("Good vibrations","0337","Wilson/Love",1,4,4),
 ("heroes and villains","0337","Brian Wilson/Van Dyke Parks",1,4,4),
 ("Staying alive","0445","Barry Gibb/Robin Gibb/Maurice Gibb",3,5,5),
-("For My People","0353","Scott/Abdul-Rahman/Adam/Pallin/Barsh/Seeff",4,1,1),
-("Babylon","0536","Scott/Gabriel Stevenson/Pallin/Jamar McNaughton",4,1,1),
-
-
-
-
+("For My People","0353","Scott/Abdul-Rahman/Adam/Pallin/Barsh/Seeff",4,1,6),
+("Babylon","0536","Scott/Gabriel Stevenson/Pallin/Jamar McNaughton",4,1,6),
+("Good Morning Amerikkka","0138","Jo-Vaughn/Scott/Khalil Abdul-Rahman/Sam Barsh/Dan Seeff",4,1,6),
+("Back in Black","0414","AngusYoung/Malcom Young/brian Johnsson",2,3,7),
+("Hells Bells","0510","AngusYoung/Malcom Young/brian Johnsson",2,3,7),
+("You Shook Me All Night Long","0330","AngusYoung/Malcom Young/brian Johnsson",2,3,7)
 ;
 
  
