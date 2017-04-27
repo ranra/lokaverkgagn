@@ -47,19 +47,50 @@ where cd.cd_artist =artist.id and cd.cd_utgefandi =utgefandi.id and utgefandi.na
 
 
 #g) Sýnið fimm lengstu lögin, nafn flytjanda og nafn útgefanda.
+select log.nafn,log.lengd,artist.nafn as flytjandi,utgefandi.nafn as utgefandi
+from cd
+inner join log,artist,utgefandi
+where log.log_artist =artist.id and cd.cd_utgefandi = utgefandi.id and log.log_cd = cd.id
+ORDER BY log.lengd DESC
+limit 5
+;
 
 
 
 #h) Sýnið fjölda diska á tegund – birtið bara þær tvær tegundir sem hafa flesta diska.
+select tegund.tegund,min(cd.cd_tegund) as fjöldiDiska
+from tegund
+
+inner join cd
+where cd.cd_tegund = tegund.id 
+group by tegund.tegund
+order by count(cd.cd_tegund) desc
+limit 2
+;
+
 
 
 #i) Sýnið þann útgefanda sem hefur gefið út fæsta diska.
+select utgefandi.nafn,count(cd.cd_utgefandi) as fjöldiDiska
+from cd
+inner join utgefandi
+where cd.cd_utgefandi = utgefandi.id 
+group by utgefandi.nafn
+order by count(cd.cd_utgefandi) asc
+limit 1
+;
 
 
-#j) Sýnið nafn, tegund, útgefanda allra diska sem gefnir eru út á árunum 1998-2017. Hópað saman
+#j) Sýnið nafn, tegund, útgefanda allra diska sem gefnir eru út á árunum 1998-2017. Hópað saman eftir útgefanda.
+select cd.nafn,tegund.tegund,cd.utgafudagur,utgefandi.nafn
+from cd
+inner join utgefandi,tegund
+where cd.cd_utgefandi =utgefandi.id and cd.cd_tegund=tegund.id and cd.utgafudagur >1998
+order by utgefandi.nafn
+;
 
 
-#eftir útgefanda.
+
 
 
 #k) Sýnið hversu mörg lög byrja á bókstafnum A og hversu mörg lög hafa bókstafinn s í nafninu.
