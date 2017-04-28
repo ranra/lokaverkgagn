@@ -111,12 +111,10 @@ from artist
 
 
 #m) Sýndu meðallengd allra laganna.
-
-select log.nafn,avg(lengd) as lengd
-from log
-
+SELECT  
+       MINUTE((SELECT SEC_TO_TIME(AVG(TIME_TO_SEC(`lengd`))) FROM log)), 
+       SECOND((SELECT SEC_TO_TIME(AVG(TIME_TO_SEC(`lengd`))) FROM log))
 ;
-
 
 
 #n) Sýndu hversu margir flytjendur eiga fleiri en 4 lög.
@@ -132,20 +130,35 @@ having count(log.log_artist) >3
 
 #o) Sýndu elsta flytjandann og nöfn allra hans laga.
 
-select artist.nafn,max(round(DATEDIFF(current_date(),stofndagur)/365)) as aldur,log.nafn
+select artist.nafn,round(DATEDIFF(current_date(),stofndagur)/365) as aldur,log.nafn
 from artist
 inner join log
-where log.log_artist =artist.id  and stofndagur = aldur 
-group by log.nafn,artist.nafn,artist.stofndagur
-order by log.nafn,artist.stofndagur
+where log.log_artist = artist.id and artist.stofndagur = (SELECT min(stofndagur) from artist)
+
+
+
+
+
 
 
 
 # og hér koma spurningarnar mínar
 
+#1.sýndu nafn allra meðlimi i hljomsveit
 
 
+#2.sýndu þá hljómsveit sem hefur flesta dauða meðlimi 
 
+#3.sýndu yngstu persónuna í gagnagrunn meðlimir og hvaða artist hun tilheyrir
+
+
+#4. elsta personan í meðlimir og hvað hun gerði marga cd´s
+
+#5. sýndu allar uplysingar um meðlim  sem gerði lengsta lagið
+
+#6 sýndu lýsingu  um einn meðlim sem er tilheyrir artist sem tilheyrir flokk með lengsta nafnið
+
+#7 sýndu ef einhver gaf ut plötu a afmælis daginn sinn 
 
 
 
