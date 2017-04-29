@@ -217,6 +217,7 @@ from artist
 inner join medlimir,cd
 where cd.cd_artist=artist.id and medlimir.medlimir_artist =artist.id and (select DATEDIFF(medlimir.faedingardagur,cd.utgafudagur)%365)
 having reikningur=0
+;
 
 
 
