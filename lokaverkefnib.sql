@@ -118,7 +118,7 @@ SELECT
 
 
 #n) Sýndu hversu margir flytjendur eiga fleiri en 4 lög.
-select artist.nafn,count(log.log_artist)
+select artist.nafn,count(log.log_artist) as fjoldi
 from log
 inner join artist
 where log.log_cd = artist.id
@@ -134,6 +134,7 @@ select artist.nafn,round(DATEDIFF(current_date(),stofndagur)/365) as aldur,log.n
 from artist
 inner join log
 where log.log_artist = artist.id and artist.stofndagur = (SELECT min(stofndagur) from artist)
+;
 
 
 
@@ -144,21 +145,78 @@ where log.log_artist = artist.id and artist.stofndagur = (SELECT min(stofndagur)
 
 # og hér koma spurningarnar mínar
 
-#1.sýndu nafn allra meðlimi i hljomsveit
+#1.sýndu nafn allra meðlima i einhverri hljomsveit
+select medlimir.nafn,artist.nafn
+from artist
+inner join medlimir
+where medlimir.medlimir_artist =artist.id and artist.nafn="ac/dc"
+;
 
 
-#2.sýndu þá hljómsveit sem hefur flesta dauða meðlimi 
+#2.sýndu þær hljómsveitir sem hafa dauða meðlimi í röð
+select medlimir.nafn,artist.nafn,medlimir.lifandi,medlimir.latinn,count(medlimir.medlimir_artist) as num
+from medlimir
+inner join artist
+where medlimir.medlimir_artist =artist.id and medlimir.lifandi ="nei" 
+group by artist.nafn
+order by count(medlimir.medlimir_artist) desc
+;
+
+
+
+
+
+
 
 #3.sýndu yngstu persónuna í gagnagrunn meðlimir og hvaða artist hun tilheyrir
+select medlimir.nafn,artist.nafn,round(DATEDIFF(current_date(),medlimir.faedingardagur)/365) as aldur
+from medlimir
+inner join artist
+where medlimir.medlimir_artist =artist.id and medlimir.faedingardagur = (select max(medlimir.faedingardagur) from medlimir)
+;
 
 
 #4. elsta personan í meðlimir og hvað hun gerði marga cd´s
 
-#5. sýndu allar uplysingar um meðlim  sem gerði lengsta lagið
+select medlimir.nafn,artist.nafn,round(DATEDIFF(current_date(),medlimir.faedingardagur)/365) as aldur,count(cd.cd_artist) as Cds
+from medlimir
+inner join artist,cd
+where medlimir.medlimir_artist =artist.id and cd.cd_artist =artist.id and medlimir.faedingardagur = (select min(medlimir.faedingardagur) from medlimir)
+;
 
-#6 sýndu lýsingu  um einn meðlim sem er tilheyrir artist sem tilheyrir flokk með lengsta nafnið
+
+#5. sýndu allar uplysingar um meðlim  sem gerði lengsta lagið
+select artist.nafn,log.nafn,max(log.lengd),medlimir.nafn,medlimir.faedingardagur,round(DATEDIFF(current_date(),medlimir.faedingardagur)/365) as aldur,medlimir.lifandi,medlimir.latinn,medlimir.lysing
+from artist 
+inner join log,medlimir
+where  log.log_artist = artist.id and  log.lengd= (select max(log.lengd) from log)
+;
+
+
+
+
+#6 sýndu hvað flokk tegundin með flest lög tilheyrir
+#breytti dæminu því ég sá að það var aðeins of líkt öðru dæmi 
+select flokkur.flokkur,count(log.log_tegund) as lög,tegund.tegund
+from artist
+inner join log,tegund,flokkur
+where log.log_artist =artist.id and log.log_tegund =tegund.id and artist.artist_flokkur =flokkur.id 
+group by tegund.tegund desc
+limit 1
+;
+
+
+
+
+
 
 #7 sýndu ef einhver gaf ut plötu a afmælis daginn sinn 
+
+select artist.nafn,medlimir.nafn,medlimir.faedingardagur,cd.nafn,cd.utgafudagur,DATEDIFF(cd.utgafudagur,medlimir.faedingardagur)%365.25 as reikningur
+from artist
+inner join medlimir,cd
+where cd.cd_artist=artist.id and medlimir.medlimir_artist =artist.id and (select DATEDIFF(medlimir.faedingardagur,cd.utgafudagur)%365)
+having reikningur=0
 
 
 
